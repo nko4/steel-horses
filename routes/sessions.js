@@ -1,3 +1,6 @@
 exports.index = function(req, res){
-  res.render('./sessions/login');
+  res.render('./sessions/index');
+};
+
+exports.post = function(req, res){
 };
