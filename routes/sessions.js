@@ -6,12 +6,12 @@ exports.index = function(req, res){
 exports.create = function(req, res){
   var User = require('../models/user.js');
 
-  User.findOne({email: req.body.email, password: req.body.password}, function(error, user) {
+  User.findOne({username: req.body.username, password: req.body.password}, function(error, user) {
     if(user) {
       req.session.user = user;
       res.redirect('/');
     }else{
-      var user = new User({email: req.body.email, password: req.body.password});
+      var user = new User({username: req.body.username, password: req.body.password});
       user.receivedFreeStickers = false;
       user.save(function (err) {
         if(!err) {

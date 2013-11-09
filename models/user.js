@@ -3,7 +3,7 @@ var mongoose = require('mongoose')
   , ObjectId = Schema.ObjectId;
 
 var userSchema = new Schema({
-    email: String,
+    username: String,
     password: String,
     receivedFreeStickers: Boolean,
     stickers: Array,

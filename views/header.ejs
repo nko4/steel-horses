@@ -1,12 +1,12 @@
 <div class="page-header">
   <h3>Steel Stickers <small>Yet another old school virtual stickers album.</small></h3>
   <div class="user-info">
-    <% if(typeof(user.email) != 'undefined') { %>
+    <% if(typeof(user.username) != 'undefined') { %>
       <span class="progress"></span>
-      <%= user.email %>
-      <a href="/sessions">Sign Out</a>
+      <%= user.username %>
+      <a class="btn btn-danger btn-xs" href="/sessions">Sign Out</a>
     <% } else { %>
-      <a href="/sessions">Sign in</a>
+      <a class="btn btn-primary btn-xs" href="/sessions">Sign in</a>
     <% } %>
   </div>
 </div>

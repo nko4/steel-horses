@@ -5,7 +5,7 @@ exports.index = function(req, res){
   var userId = req.route.params.user_id;
   var album = Album.init();
   var currentUser = req.session.user;
-  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {} || typeof(req.session.user.email) == 'undefined' ) {
+  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {} || typeof(req.session.user.username) == 'undefined' ) {
     currentUser = {};
   }
   User.findOne({_id: userId}, function(error, fetchedUser) {

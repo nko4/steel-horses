@@ -4,7 +4,7 @@ var User = require('../models/user.js');
 const FreeStickersCount = 5;
 
 exports.index = function(req, res){
-  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {} || typeof(req.session.user.email) == 'undefined' ) {
+  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {} || typeof(req.session.user.username) == 'undefined' ) {
     res.redirect('./sessions');
   }else{
     var album = Album.init();
