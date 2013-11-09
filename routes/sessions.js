@@ -1,6 +1,6 @@
 exports.index = function(req, res){
   req.session.user = {};
-  res.render('./sessions/index', {user: req.session.user});
+  res.render('./sessions/index', {user: req.session.user, album: {}});
 };
 
 exports.create = function(req, res){

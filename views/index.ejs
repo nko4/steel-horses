@@ -1,54 +1,14 @@
-<%
-
-      console.log("Fetching user: " +user.gluedStickers);
-%>
-
 <input type="hidden" id="current-user-id" value="<%= user._id %>" />
 
 <div class="row">
-<div id="my-stickers" class="col-md-4">
-  <h4><small>My Stickers</small></h4>
-  <ul id="stickers-list" >
-  <% myStickers = user.stickers %>
-  <% for(var i=0; i < myStickers.length; i++) { %>
-    <% var sticker = album.findStickerByNumber(myStickers[i]); %>
-    <li class="stickers-list-item">
-      <div class="sticker-thumb">
-      <img src="<%= sticker.image %>" />
-      </div>
-      <%= sticker.number %> <small>by <%= sticker.author %></small>
-<br />
-      <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
-      <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
-      <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
-    </li>
-  <% } %>
-  </ul>
-</div>
+  <div id="my-stickers" class="col-md-4">
+    <%- partial('my_stickers.ejs', {locals: {album: album, user: user}}) %>
+  </div>
 
-
-<div id="current-album"  class="col-md-8">
-  <% for(var i=0; i < album.pages.length; i++) { %>
-    <% var page = album.pages[i] %>
-    <div id="page-<%= page.number %>" class="page" style="background-image: url(<%= page.image %>); height: 100%">
-      <% for(var j=0; j < page.stickers.length; j++) { %>
-        <% var sticker = page.stickers[j] %>
-        <% var hasSticker = false; %>
-        <% var stickerClass = "hide" %>
-        <% var placeholderStickerClass = "" %>
-        <% console.log(user.gluedStickers + '<>' + sticker.number + '-> ' + user.gluedStickers.indexOf(''+ sticker.number)) %>
-        <% if(user.gluedStickers.indexOf(''+ sticker.number) != -1) { hasSticker = true;  stickerClass="", placeholderStickerClass = "hide" } %>
-        <img id="sticker-<%= sticker.number %>" class="sticker <%= stickerClass %>" src="<%= sticker.image %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
-        <div id="placeholder-<%= sticker.number %>" class="sticker-placeholder <%= placeholderStickerClass %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" >
-            <h3><%= sticker.number %></h3>
-         </div>
-        <% if((i % 2) == 0) { %> <div class="overlay-left-page"></div>
-        <% } else { %> <div class="overlay-right-page"></div> <% } %>
-      <% } %>
-    </div>
-  <% } %>
-</div>
-</div>
+  <div id="current-album"  class="col-md-8">
+    <%- partial('album.ejs', {locals: {album: album, user: user}}) %>
+  </div>
+</div>  
 
 <script>
   $(function() {
@@ -59,6 +19,10 @@
       pagePadding: 0
     });
 
+    var gluedStickers = [<%= user.gluedStickers %>];
+    var stickers = [<%= user.stickers %>];
+    var albumSize = <%= album.getAllStickers().length %>;
+
     $('.glue-sticker').click(function(){
       var row = $(this).closest('li');
       var stickerNumber = row.find('input:hidden').val()
@@ -67,10 +31,20 @@
         $('#placeholder-' + stickerNumber).fadeOut(300);
         row.fadeOut(1000);
         socket.emit('userGluedSticker', { userId: $('#current-user-id').val(), stickerNumber: stickerNumber });
+        gluedStickers.push(stickerNumber);
+        var i = stickers.indexOf(stickerNumber);
+        if(i != -1) { stickers.splice(i, 1); }
+        updateProgress();
       }else{
         alert("You've already glued this sticker, exchange it with other users!");
       }
       return false; 
       });
-    });
+
+    function updateProgress(){
+      var percentage = (gluedStickers.length * 100 / albumSize).toFixed(2)
+      $('.progress').text(percentage + "% Completed -");
+    }
+    updateProgress();
+  });
 </script>

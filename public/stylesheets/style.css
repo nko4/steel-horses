@@ -16,6 +16,7 @@ html {
   margin: 0;
   margin-bottom: 5px;
   padding-left: 10px;
+  padding-bottom: 0;
   display: inline-block;
   width: 100%;
 }
@@ -24,6 +25,7 @@ html {
   color: #F1684E;
   font-size: 18px;
   float: left;
+  margin-top: 17px;
 }
 
 .page-header h3 small{
@@ -32,8 +34,15 @@ html {
 
 .page-header .user-info {
   float: right;
-  padding: 15px;
+  padding-top: 20px;
+  padding-right: 10px;
   color: #FFF;
+}
+
+.page-header span {
+  background-color: transparent;
+  background-image: none;
+  font-size: 12px;
 }
 
 #current-album {
@@ -125,5 +134,4 @@ html {
 #stickers-list {
   padding-left: 15px;
 }
-
 

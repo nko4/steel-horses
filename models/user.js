@@ -10,4 +10,6 @@ var userSchema = new Schema({
     gluedStickers: Array
 });
 
+
 module.exports = mongoose.model('User', userSchema);
+

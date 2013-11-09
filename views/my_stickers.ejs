@@ -1,0 +1,18 @@
+<h4><small>My Stickers</small></h4>
+<ul id="stickers-list" >
+  <% myStickers = user.stickers %>
+  <% for(var i=0; i < myStickers.length; i++) { %>
+    <% var sticker = album.findStickerByNumber(myStickers[i]); %>
+    <li class="stickers-list-item">
+      <div class="sticker-thumb">
+      <img src="<%= sticker.image %>" />
+      </div>
+      <%= sticker.number %> <small>by <%= sticker.author %></small>
+      <br />
+      <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
+      <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
+      <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
+    </li>
+  <% } %>
+</ul>
+

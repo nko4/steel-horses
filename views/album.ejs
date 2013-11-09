@@ -1,0 +1,19 @@
+<% for(var i=0; i < album.pages.length; i++) { %>
+  <% var page = album.pages[i] %>
+  <div id="page-<%= page.number %>" class="page" style="background-image: url(<%= page.image %>); height: 100%">
+    <% for(var j=0; j < page.stickers.length; j++) { %>
+      <% var sticker = page.stickers[j] %>
+      <% var hasSticker = false; %>
+      <% var stickerClass = "hide" %>
+      <% var placeholderStickerClass = "" %>
+      <% if(user.gluedStickers.indexOf(''+ sticker.number) != -1) { hasSticker = true;  stickerClass="", placeholderStickerClass = "hide" } %>
+      <img id="sticker-<%= sticker.number %>" class="sticker <%= stickerClass %>" src="<%= sticker.image %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
+      <div id="placeholder-<%= sticker.number %>" class="sticker-placeholder <%= placeholderStickerClass %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" >
+          <h3><%= sticker.number %></h3>
+       </div>
+      <% if((i % 2) == 0) { %> <div class="overlay-left-page"></div>
+      <% } else { %> <div class="overlay-right-page"></div> <% } %>
+    <% } %>
+  </div>
+<% } %>
+
