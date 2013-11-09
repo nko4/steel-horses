@@ -7,18 +7,19 @@ exports.create = function(req, res){
 
   User.findOne({email: req.body.email, password: req.body.password}, function(error, user) {
     if(user) {
-      req.session.user = user.email;
-      res.render('index');
+      req.session.user = user._id;
+      res.redirect('/');
     }else{
       var user = new User({email: req.body.email, password: req.body.password});
 
       user.save(function (err) {
         if(!err) {
-          req.session.user = user.email;
+          req.session.user = user._id;
+          console.log(req.session)
         }
       });
 
-      res.render('index');
+      res.redirect('/');
     };
   })
 };

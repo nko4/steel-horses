@@ -18,12 +18,11 @@ app.set('view engine', 'ejs');
 app.use(partials());
 app.use(express.cookieParser('steelhorse@123#1'));
 app.use(express.logger('dev'));
-app.use(express.session());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.session());
 app.use(express.bodyParser());
 app.use(app.router);
-
 // development only
 app.configure('development', function (){
     app.use( express.errorHandler({ dumpExceptions : true, showStack : true }));
