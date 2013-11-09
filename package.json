@@ -16,7 +16,8 @@
     "mongodb": "*",
     "ejs": "*",
     "stylus": "*",
-    "express-partials": "*"
+    "express-partials": "*",
+    "mongoose": "*"
   },
   "engines": {
     "node": "0.10.x"

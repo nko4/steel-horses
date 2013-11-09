@@ -3,12 +3,12 @@ var AlbumPage = require('../models/album_page');
 var Sticker = require('../models/sticker');
 
 exports.index = function(req, res){
-  //if(!req.session.user) {
-  //  res.redirect('./login');
-  //}else{
+  if(!req.session.user) {
+    res.redirect('./sessions');
+  }else{
     var currentAlbum = createDefaultAlbum();
     res.render('index', { title: currentAlbum.name, album: currentAlbum });
-  //}
+  }
 };
 
 function createDefaultAlbum() {
