@@ -1,26 +1,31 @@
 // https://github.com/nko4/website/blob/master/module/README.md#nodejs-knockout-deploy-check-ins
 require('nko')('w0_XXuWDPdZYcRFP');
 
-var isProduction = (process.env.NODE_ENV === 'production');
-var http = require('http');
-var port = (isProduction ? 80 : 8000);
+var express = require('express'),
+    app = express(),
+    cons = require('consolidate'),
+    crypto = require('crypto'),
+    MongoClient = require('mongodb').MongoClient,
+    http = require('http'),
+    port = (isProduction ? 80 : 8000),
+    isProduction = (process.env.NODE_ENV === 'production');
 
-http.createServer(function (req, res) {
-  // http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app
-  var voteko = '<iframe src="http://nodeknockout.com/iframe/steel-horses" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>';
+app.engine('html', cons.swig);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
 
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end('<html><body>' + voteko + '</body></html>\n');
-}).listen(port, function(err) {
-  if (err) { console.error(err); process.exit(-1); }
+MongoClient.connect('mongodb://localhost:27017/steel_horses', function(err, db) {
+  if(err) throw err;
 
-  // if run as root, downgrade to the owner of this file
-  if (process.getuid() === 0) {
-    require('fs').stat(__filename, function(err, stats) {
-      if (err) { return console.error(err); }
-      process.setuid(stats.uid);
-    });
-  }
+  app.get('/', function(req, res){
 
-  console.log('Server running at http://0.0.0.0:' + port + '/');
+  });
+
+
+  app.get('*', function(req, res){
+    return res.send('Page Not Found', 404);
+  });
+
+  app.listen(8080);
+  console.log('Go horses on 8080');
 });

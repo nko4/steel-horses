@@ -11,7 +11,12 @@
     "url": "git@github.com:nko4/steel-horses.git"
   },
   "dependencies": {
-    "nko": "*"
+    "nko": "*",
+    "consolidate": "*",
+    "crypto": "*",
+    "express": "*",
+    "mongodb": "*",
+    "swig": "*"
   },
   "engines": {
     "node": "0.10.x"
