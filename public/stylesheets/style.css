@@ -31,3 +31,47 @@ html {
 #current-album {
 }
 
+#current-album .overlay-left-page {
+  background:url(/images/overlay-left-page.png) 0 0 no-repeat;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 600px;
+}
+
+#current-album .overlay-right-page {
+  background:url(/images/overlay-right-page.png) 0 0 no-repeat;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 600px;
+}
+
+#current-album .sticker-placeholder {
+  background-color: #FFF; 
+  position: absolute;
+  opacity: 0.4;
+}
+
+#current-album .sticker-placeholder h3 {
+  margin: 10px;
+  color: #000;
+  
+}
+
+#current-album .b-counter {
+  background-color: transparent;
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 14px;
+  color: #000;
+}
+
+#current-album .page {
+  border: 1px solid #c1c1c1;
+}
+
+#current-album .sticker {
+  border: 3px inset #FFF;
+}

@@ -1,6 +1,6 @@
 <%
   var user = {
-    ownedStickers: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    ownedStickers: [1,2,3,5,6,7,8,9,10,11,12,13,14,15]
 };
 %>
 
@@ -13,8 +13,12 @@
         <% if(user.ownedStickers.indexOf(sticker.number) != -1) { %>
           <img id="sticker-<%= sticker.number %>" class="sticker" src="<%= sticker.image %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
         <% } else { %>
-          <img id="sticker-<%= sticker.number %>" class="sticker" src="<%= 'images/stickers/' + album.namespace + '/placeholder.png'  %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
+          <div class="sticker-placeholder" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" >
+            <h3><%= sticker.number %></h3>
+</div>
         <% } %>
+        <% if((i % 2) == 0) { %> <div class="overlay-left-page"></div>
+        <% } else { %> <div class="overlay-right-page"></div> <% } %>
       <% } %>
     </div>
   <% } %>
