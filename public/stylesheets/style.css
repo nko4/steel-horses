@@ -22,6 +22,7 @@ html {
 .page-header h3 {
   font-family: 'Sintony', sans-serif !important;
   color: #F1684E;
+  font-size: 18px;
 }
 
 .page-header h3 small{
@@ -75,3 +76,33 @@ html {
 #current-album .sticker {
   border: 3px inset #FFF;
 }
+
+#my-stickers {
+  width: 300px;
+  height: 600px;
+  background-color: #1B1B1B;
+  margin-right: 10px;
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 16px;
+  overflow-y: scroll;
+}
+
+#my-stickers h4 small{
+  color: #F1684E;
+  padding: 15px;
+}
+
+#my-stickers .stickers-list-item {
+  background-color: #c1c1c1;
+  margin-bottom:1px;
+}
+
+#my-stickers .stickers-list-item .sticker-thumb{
+  width: 100px;
+}
+
+#stickers-list {
+  padding-left: 15px;
+}
+
+

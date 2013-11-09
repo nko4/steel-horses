@@ -4,7 +4,23 @@
 };
 %>
 
-<div id="current-album">
+<div class="row">
+<div id="my-stickers" class="col-md-4">
+  <h4><small>My Stickers</small></h4>
+  <ul id="stickers-list" >
+  <% myStickers = user.ownedStickers %>
+  <% for(var i=0; i < myStickers.length; i++) { %>
+    <% var sticker = album.findStickerByNumber(myStickers[i]); %>
+    <li class="stickers-list-item">
+      <img class="sticker-thumb" src="<%= sticker.image %>" />
+      <%= sticker.number %>
+    </li>
+  <% } %>
+  </ul>
+</div>
+
+
+<div id="current-album"  class="col-md-8">
   <% for(var i=0; i < album.pages.length; i++) { %>
     <% var page = album.pages[i] %>
     <div id="page-<%= page.number %>" class="page" style="background-image: url(<%= page.image %>); height: 100%">
@@ -23,7 +39,7 @@
     </div>
   <% } %>
 </div>
-
+</div>
 
 <script>
   $(function() {
