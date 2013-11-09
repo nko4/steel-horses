@@ -47,6 +47,9 @@ io.configure('production', function(){
   ]);
 });
 
+io.sockets.on('connection',function(socket){
+});
+
 app.get('/', routes.index);
 app.get('/sessions', sessions.index);
 app.post('/sessions', sessions.create);
