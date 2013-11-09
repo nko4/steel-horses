@@ -4,6 +4,8 @@ require('nko')('w0_XXuWDPdZYcRFP');
 var express = require('express')
   ,  app = express()
   ,  http = require('http')
+  ,  server = http.createServer(app)
+  ,  io = require('socket.io').listen(server)
   ,  path = require('path')
   ,  mongoose = require('mongoose')
   ,  partials = require('express-partials')
@@ -30,10 +32,23 @@ app.configure('development', function (){
 
 mongoose.connect( 'mongodb://localhost:27017/steel_horses');
 
+// Socket.io production config
+io.configure('production', function(){
+  io.enable('browser client minification');
+  io.enable('browser client etag');
+  io.enable('browser client gzip');
+  io.set('log level', 1);
+  io.set('transports', [
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+  ]);
+});
+
 app.get('/', routes.index);
 app.get('/sessions', sessions.index);
 app.post('/sessions', sessions.create);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Go horses on ' + app.get('port'));
-});
+server.listen(app.get('port'));
