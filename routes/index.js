@@ -16,6 +16,7 @@ function createDefaultAlbum() {
   stickersImagePath = 'images/stickers/default/';
   var pages = [];
 
+  // MISS VAN
   var missVanPageOneStickers = [];
   missVanPageOneStickers.push(new Sticker({ x: 10, y: 10, image: stickersImagePath + 'miss-van-1.jpeg', number: 1, width: 180, height: 240}));
   missVanPageOneStickers.push(new Sticker({ x: 210, y: 10, image: stickersImagePath + 'miss-van-2.jpeg', number: 2, width: 180, height: 240}));
@@ -34,6 +35,22 @@ function createDefaultAlbum() {
   pages.push(new AlbumPage({stickers: missVanPageOneStickers, number: 1, image: 'images/pages/default/miss-van.jpeg'}));
   pages.push(new AlbumPage({stickers: missVanPageTwoStickers, number: 2, image: 'images/pages/default/miss-van.jpeg'}));
   pages.push(new AlbumPage({stickers: missVanPageThreeStickers, number: 3, image: 'images/pages/default/miss-van.jpeg'}));
+
+
+  // INVADER
+  var invaderPageOneStickers = [];
+  invaderPageOneStickers.push(new Sticker({ x: 10, y: 10, image: stickersImagePath + 'invader-1.jpeg', number: 10, width: 180, height: 135}));
+  invaderPageOneStickers.push(new Sticker({ x: 210, y: 50, image: stickersImagePath + 'invader-2.jpeg', number: 11, width: 180, height: 135}));
+  invaderPageOneStickers.push(new Sticker({ x: 10, y: 310, image: stickersImagePath + 'invader-3.jpeg', number: 12, width: 380, height: 214}));
+
+  var invaderPageTwoStickers = [];
+  invaderPageTwoStickers.push(new Sticker({ x: 210, y: 370, image: stickersImagePath + 'invader-4.jpeg', number: 14, width: 180, height: 135}));
+  invaderPageTwoStickers.push(new Sticker({ x: 10, y: 330, image: stickersImagePath + 'invader-6.jpeg', number: 15, width: 180, height: 120}));
+  invaderPageTwoStickers.push(new Sticker({ x: 5, y: 10, image: stickersImagePath + 'invader-5.jpeg', number: 13, width: 380, height: 264}));
+
+  pages.push(new AlbumPage({stickers: invaderPageOneStickers, number: 4, image: 'images/pages/default/invader.jpeg'}));
+  pages.push(new AlbumPage({stickers: invaderPageTwoStickers, number: 5, image: 'images/pages/default/invader.jpeg'}));
+
 
   var album = new Album({pages: pages, name: 'Default', namespace: 'default', width: 800});
   return album;
