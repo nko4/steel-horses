@@ -1,3 +1,7 @@
+<%
+  console.log("Fetching user: " +user.gluedStickers);
+%>
+
 <input type="hidden" id="current-user-id" value="<%= user._id %>" />
 
 <div class="row">
@@ -8,7 +12,7 @@
   <div id="current-album"  class="col-md-8">
     <%- partial('album.ejs', {locals: {album: album, user: user}}) %>
   </div>
-</div>  
+</div>
 
 <script>
   $(function() {
@@ -38,7 +42,7 @@
       }else{
         alert("You've already glued this sticker, exchange it with other users!");
       }
-      return false; 
+      return false;
       });
 
     function updateProgress(){
@@ -46,5 +50,13 @@
       $('.progress').text(percentage + "% Completed -");
     }
     updateProgress();
+  });
+</script>
+
+<script>
+  $(function() {
+    setInterval(function() {
+      socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
+    }, 100000);
   });
 </script>

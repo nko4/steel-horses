@@ -71,7 +71,32 @@ io.sockets.on('connection', function(client){
   client.on('userReceivedSticker', function (data) {
     console.log("Giving sticker " + data.stickerNumber + " to " + data.userId);
   });
+
+  client.on('itsTimeToSendSticker', function (data) {
+    console.log("Sending a new sticker");
+    sendSticker(data.userId);
+  });
 });
+
+function sendSticker(userId) {
+  var Album = require('./models/album');
+  var album = Album.init();
+  var sticker = album.getRandomSticker();
+
+  User.findOne({_id: userId}, function (err, user) {
+    user.stickers.push(sticker.number);
+
+    user.stickers = user.stickers;
+
+    user.save(function (err) {
+      if(err) {
+        console.error('ERROR!');
+      } else {
+        console.log("A new sticker has arrived!");
+      }
+    });
+  });
+}
 
 function glueSticker(userId, stickerNumber) {
   User.findOne({_id: userId}, function (err, user) {
