@@ -18,7 +18,7 @@ MongoClient.connect('mongodb://localhost:27017/steel_horses', function(err, db) 
   if(err) throw err;
 
   app.get('/', function(req, res){
-
+    res.render('application');
   });
 
 
