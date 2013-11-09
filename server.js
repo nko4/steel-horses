@@ -3,10 +3,13 @@ require('nko')('w0_XXuWDPdZYcRFP');
 
 var express = require('express'),
     app = express(),
-    routes = require('./routes'),
     http = require('http'),
     MongoClient = require('mongodb').MongoClient,
     path = require('path');
+
+// routes
+var application = require('./routes/application');
+    sessions = require('./routes/sessions');
 
 app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
@@ -29,7 +32,8 @@ if ('development' == app.get('env')) {
 MongoClient.connect('mongodb://localhost:27017/steel_horses', function(err, db) {
   if(err) throw err;
 
-  app.get('/', routes.index);
+  app.get('/', application.index);
+  app.get('/login', sessions.index);
 
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Go horses on ' + app.get('port'));
