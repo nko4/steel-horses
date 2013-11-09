@@ -12,11 +12,10 @@
   },
   "dependencies": {
     "nko": "*",
-    "consolidate": "*",
-    "crypto": "*",
     "express": "*",
     "mongodb": "*",
-    "swig": "*"
+    "ejs": "*",
+    "stylus": "*"
   },
   "engines": {
     "node": "0.10.x"
