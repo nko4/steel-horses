@@ -10,7 +10,7 @@ var express = require('express'),
 
 app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 app.use(express.cookieParser('steelhorse@123#1'));
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -29,21 +29,7 @@ if ('development' == app.get('env')) {
 MongoClient.connect('mongodb://localhost:27017/steel_horses', function(err, db) {
   if(err) throw err;
 
-  app.get('*', function(req, res){
-    return res.send('Page Not Found', 404);
-  });
-
-  app.get('/', function(req, res) {
-    res.render('application');
-  });
-
-  app.get('/login', function(req, res) {
-    res.render('login');
-  });
-
-  app.post('/sessions', function(req, res) {
-    var auth = express.basicAuth(function(username, password) { });
-  });
+  app.get('/', routes.index);
 
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Go horses on ' + app.get('port'));
