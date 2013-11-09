@@ -2,6 +2,7 @@
 require('nko')('w0_XXuWDPdZYcRFP');
 
 var express = require('express'),
+    partials = require('express-partials'),
     app = express(),
     http = require('http'),
     MongoClient = require('mongodb').MongoClient,
@@ -14,6 +15,7 @@ var application = require('./routes/application');
 app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(partials());
 app.use(express.cookieParser('steelhorse@123#1'));
 app.use(express.logger('dev'));
 app.use(express.json());
