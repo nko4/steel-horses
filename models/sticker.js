@@ -11,6 +11,7 @@ function Sticker(attributes) {
   this.x = attributes.x;
   this.y = attributes.y;
   this.number = attributes.number;
+  this.author = attributes.author;
 }
 
 module.exports = Sticker;

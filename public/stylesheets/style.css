@@ -106,6 +106,10 @@ html {
   width: 100%;
   list-style-type: none;
 }
+#my-stickers .stickers-list-item small{
+  font-size: 10px;
+}
+
 #my-stickers .stickers-list-item .sticker-thumb img{
   width: 100px;
 }
@@ -115,6 +119,7 @@ html {
   height:50px;
   float: left;
   overflow:hidden;
+  margin-right: 5px;
 }
 
 #stickers-list {

@@ -5,7 +5,9 @@ var mongoose = require('mongoose')
 var userSchema = new Schema({
     email: String,
     password: String,
-    receivedFreeStickers: Boolean
+    receivedFreeStickers: Boolean,
+    stickers: Array,
+    gluedStickers: Array
 });
 
 module.exports = mongoose.model('User', userSchema);
