@@ -1,1 +1,33 @@
-index
+<%
+  var user = {
+    ownedStickers: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+};
+%>
+
+<div id="current-album">
+  <% for(var i=0; i < album.pages.length; i++) { %>
+    <% var page = album.pages[i] %>
+    <div id="page-<%= page.number %>" class="page" style="background-image: url(<%= page.image %>); height: 100%">
+      <% for(var j=0; j < page.stickers.length; j++) { %>
+        <% var sticker = page.stickers[j] %>
+        <% if(user.ownedStickers.indexOf(sticker.number) != -1) { %>
+          <img id="sticker-<%= sticker.number %>" class="sticker" src="<%= sticker.image %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
+        <% } else { %>
+          <img id="sticker-<%= sticker.number %>" class="sticker" src="<%= 'images/stickers/' + album.namespace + '/placeholder.png'  %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
+        <% } %>
+      <% } %>
+    </div>
+  <% } %>
+</div>
+
+
+<script>
+  $(function() {
+    $('#current-album').booklet({
+      width: <%= album.width %>,
+      height: <%= album.height %>,
+      keyboard: true,
+      pagePadding: 0
+    });
+  });
+</script>
