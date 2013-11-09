@@ -13,6 +13,7 @@ var express = require('express')
 // routes
 var sessions = require('./routes/sessions');
 var routes = require('./routes');
+var User = require('./models/user');
 
 app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
@@ -61,6 +62,30 @@ io.sockets.on('connection', function(client){
   client.on('disconnect', function() {
     clients.splice(clients.indexOf(client), 1);
   });
+
+  client.on('userGluedSticker', function (data) {
+    console.log("Gluing sticker " + data.stickerNumber + " to " + data.userId);
+    glueSticker(data.userId, data.stickerNumber);
+  });
+
+  client.on('userReceivedSticker', function (data) {
+    console.log("Giving sticker " + data.stickerNumber + " to " + data.userId);
+  });
 });
+
+function glueSticker(userId, stickerNumber) {
+  User.findOne({_id: userId}, function (err, user) {
+    console.log(stickerNumber);
+    user.gluedStickers.push(stickerNumber);
+    var i = user.stickers.indexOf(stickerNumber);
+    if(i != -1) { user.stickers.splice(i, 1); }
+
+    user.save(function (err) {
+      if(err) {
+        console.error('ERROR!');
+      }
+    });
+  });
+}
 
 

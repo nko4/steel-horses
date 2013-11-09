@@ -8,9 +8,15 @@ exports.index = function(req, res){
     res.redirect('./sessions');
   }else{
     var album = Album.init();
-    var currentUser = req.session.user;
-    if(!currentUser.receivedFreeStickers) { giveBeginnersFreeStickers(currentUser, album); }
-    res.render('index', { user: req.session.user, album: album });
+    var currentUser;
+    User.findOne({_id: req.session.user._id}, function(error, fetchedUser) {
+      if(!error) {
+        currentUser = fetchedUser;
+        if(!currentUser.receivedFreeStickers) { giveBeginnersFreeStickers(currentUser, album); }
+        console.log("Fetching user: " +currentUser.gluedStickers);
+        res.render('index', { user: currentUser, album: album });
+      }
+    });
   }
 };
 

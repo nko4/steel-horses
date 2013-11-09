@@ -1,6 +1,10 @@
 <%
 
+      console.log("Fetching user: " +user.gluedStickers);
 %>
+
+<input type="hidden" id="current-user-id" value="<%= user._id %>" />
+
 <div class="row">
 <div id="my-stickers" class="col-md-4">
   <h4><small>My Stickers</small></h4>
@@ -32,7 +36,8 @@
         <% var hasSticker = false; %>
         <% var stickerClass = "hide" %>
         <% var placeholderStickerClass = "" %>
-        <% if(user.gluedStickers.indexOf(sticker.number) != -1) { hasSticker = true;  stickerClass="", placeholderStickerClass = "hide" } %>
+        <% console.log(user.gluedStickers + '<>' + sticker.number + '-> ' + user.gluedStickers.indexOf(''+ sticker.number)) %>
+        <% if(user.gluedStickers.indexOf(''+ sticker.number) != -1) { hasSticker = true;  stickerClass="", placeholderStickerClass = "hide" } %>
         <img id="sticker-<%= sticker.number %>" class="sticker <%= stickerClass %>" src="<%= sticker.image %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" />
         <div id="placeholder-<%= sticker.number %>" class="sticker-placeholder <%= placeholderStickerClass %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" >
             <h3><%= sticker.number %></h3>
@@ -61,6 +66,7 @@
         $('#sticker-' + stickerNumber).removeClass("hide");
         $('#placeholder-' + stickerNumber).fadeOut(300);
         row.fadeOut(1000);
+        socket.emit('userGluedSticker', { userId: $('#current-user-id').val(), stickerNumber: stickerNumber });
       }else{
         alert("You've already glued this sticker, exchange it with other users!");
       }
