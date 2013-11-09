@@ -15,7 +15,7 @@
     <script src="javascripts/booklet/jquery.booklet.latest.min.js" type="text/javascript"></script>
   </head>
   <body>
-    <%- partial('header.ejs') %>
+    <%- partial('header.ejs', {locals: {user: user}}) %>
     <%- body %>
   </body>
 </html>

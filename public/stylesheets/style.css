@@ -12,6 +12,7 @@ html {
 
 .page-header {
   background-color: #1B1B1B;
+  font-family: 'Sintony', sans-serif !important;
   margin: 0;
   margin-bottom: 5px;
   padding-left: 10px;
@@ -20,12 +21,18 @@ html {
 }
 
 .page-header h3 {
-  font-family: 'Sintony', sans-serif !important;
   color: #F1684E;
   font-size: 18px;
+  float: left;
 }
 
 .page-header h3 small{
+  color: #FFF;
+}
+
+.page-header .user-info {
+  float: right;
+  padding: 15px;
   color: #FFF;
 }
 
@@ -95,10 +102,19 @@ html {
 #my-stickers .stickers-list-item {
   background-color: #c1c1c1;
   margin-bottom:1px;
+  overflow: hidden;
+  width: 100%;
+  list-style-type: none;
+}
+#my-stickers .stickers-list-item .sticker-thumb img{
+  width: 100px;
 }
 
 #my-stickers .stickers-list-item .sticker-thumb{
-  width: 100px;
+  width:80px;
+  height:50px;
+  float: left;
+  overflow:hidden;
 }
 
 #stickers-list {

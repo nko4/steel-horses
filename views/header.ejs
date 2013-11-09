@@ -1,3 +1,11 @@
 <div class="page-header">
   <h3>Steel Stickers <small>Yet another old school virtual stickers album.</small></h3>
+  <div class="user-info">
+    <% if(typeof(user.email) != 'undefined') { %>
+      <%= user.email %>
+      <a href="/sessions">Sign Out</a>
+    <% } else { %>
+      <a href="/sessions">Sign in</a>
+    <% } %>
+  </div>
 </div>
