@@ -47,11 +47,20 @@ io.configure('production', function(){
   ]);
 });
 
-io.sockets.on('connection',function(socket){
-});
+server.listen(app.get('port'));
 
 app.get('/', routes.index);
 app.get('/sessions', sessions.index);
 app.post('/sessions', sessions.create);
 
-server.listen(app.get('port'));
+var clients = [];
+
+io.sockets.on('connection', function(client){
+  clients.push(client);
+
+  client.on('disconnect', function() {
+    clients.splice(clients.indexOf(client), 1);
+  });
+});
+
+

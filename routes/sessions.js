@@ -16,7 +16,6 @@ exports.create = function(req, res){
       user.save(function (err) {
         if(!err) {
           req.session.user = user;
-          console.log(req.session)
         }
       });
 
