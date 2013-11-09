@@ -13,6 +13,7 @@ html {
 .page-header {
   background-color: #1B1B1B;
   margin: 0;
+  margin-bottom: 5px;
   padding-left: 10px;
   display: inline-block;
   width: 100%;
@@ -26,3 +27,7 @@ html {
 .page-header h3 small{
   color: #FFF;
 }
+
+#current-album {
+}
+
