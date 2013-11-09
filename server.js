@@ -9,8 +9,7 @@ var express = require('express'),
     path = require('path');
 
 // routes
-var application = require('./routes/application');
-    sessions = require('./routes/sessions');
+var sessions = require('./routes/sessions');
 
 app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +33,6 @@ if ('development' == app.get('env')) {
 MongoClient.connect('mongodb://localhost:27017/steel_horses', function(err, db) {
   if(err) throw err;
 
-  app.get('/', application.index);
   app.get('/login', sessions.index);
 
   http.createServer(app).listen(app.get('port'), function(){
