@@ -1,0 +1,16 @@
+<div id="current-album"  class="col-md-8">
+  <%- partial('album.ejs', {locals: {album: album, user: user}}) %>
+</div>
+
+<script>
+  $(function() {
+    $('#current-album').booklet({
+      width: <%= album.width %>,
+      height: <%= album.height %>,
+      keyboard: true,
+      pagePadding: 0
+    });
+  });
+</script>
+
+

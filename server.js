@@ -12,6 +12,7 @@ var express = require('express')
 
 // routes
 var sessions = require('./routes/sessions');
+var albums = require('./routes/albums');
 var routes = require('./routes');
 var User = require('./models/user');
 
@@ -52,6 +53,7 @@ server.listen(app.get('port'));
 
 app.get('/', routes.index);
 app.get('/sessions', sessions.index);
+app.get('/albums/:user_id?', albums.index);
 app.post('/sessions', sessions.create);
 
 var clients = [];

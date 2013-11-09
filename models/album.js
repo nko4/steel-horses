@@ -41,7 +41,7 @@ Album.prototype.getAllStickers = function() {
 
 function createDefaultAlbum() {
 
-  stickersImagePath = 'images/stickers/default/';
+  stickersImagePath = '/images/stickers/default/';
   var pages = [];
 
   // MISS VAN
@@ -61,9 +61,9 @@ function createDefaultAlbum() {
   missVanPageThreeStickers.push(new Sticker({ author: author, x: 10, y: 322, image: stickersImagePath + 'miss-van-8.jpeg', number: 8, width: 180, height: 240}));
   missVanPageThreeStickers.push(new Sticker({ author: author, x: 198, y: 282, image: stickersImagePath + 'miss-van-9.jpeg', number: 9, width: 191, height: 280}));
 
-  pages.push(new AlbumPage({stickers: missVanPageOneStickers, number: 1, image: 'images/pages/default/miss-van.jpeg'}));
-  pages.push(new AlbumPage({stickers: missVanPageTwoStickers, number: 2, image: 'images/pages/default/miss-van.jpeg'}));
-  pages.push(new AlbumPage({stickers: missVanPageThreeStickers, number: 3, image: 'images/pages/default/miss-van.jpeg'}));
+  pages.push(new AlbumPage({stickers: missVanPageOneStickers, number: 1, image: '/images/pages/default/miss-van.jpeg'}));
+  pages.push(new AlbumPage({stickers: missVanPageTwoStickers, number: 2, image: '/images/pages/default/miss-van.jpeg'}));
+  pages.push(new AlbumPage({stickers: missVanPageThreeStickers, number: 3, image: '/images/pages/default/miss-van.jpeg'}));
 
 
   // INVADER
@@ -78,8 +78,8 @@ function createDefaultAlbum() {
   invaderPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 330, image: stickersImagePath + 'invader-6.jpeg', number: 15, width: 180, height: 120}));
   invaderPageTwoStickers.push(new Sticker({ author: author, x: 5, y: 10, image: stickersImagePath + 'invader-5.jpeg', number: 13, width: 380, height: 264}));
 
-  pages.push(new AlbumPage({stickers: invaderPageOneStickers, number: 4, image: 'images/pages/default/invader.jpeg'}));
-  pages.push(new AlbumPage({stickers: invaderPageTwoStickers, number: 5, image: 'images/pages/default/invader.jpeg'}));
+  pages.push(new AlbumPage({stickers: invaderPageOneStickers, number: 4, image: '/images/pages/default/invader.jpeg'}));
+  pages.push(new AlbumPage({stickers: invaderPageTwoStickers, number: 5, image: '/images/pages/default/invader.jpeg'}));
 
 
   var album = new Album({pages: pages, name: 'Default', namespace: 'default', width: 800});

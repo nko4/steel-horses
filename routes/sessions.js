@@ -1,6 +1,6 @@
 exports.index = function(req, res){
   req.session.user = {};
-  res.render('./sessions/index', {user: req.session.user, album: {}});
+  res.render('./sessions/index', {currentUser: req.session.user, user: req.session.user, album: {}});
 };
 
 exports.create = function(req, res){
@@ -19,7 +19,6 @@ exports.create = function(req, res){
           res.redirect('/');
         }
       });
-
     };
   })
 };

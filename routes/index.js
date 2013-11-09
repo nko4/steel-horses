@@ -4,17 +4,16 @@ var User = require('../models/user.js');
 const FreeStickersCount = 5;
 
 exports.index = function(req, res){
-  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {}) {
+  if(!req.session.user || typeof(req.session.user) == 'undefined' || req.session.user == {} || typeof(req.session.user.email) == 'undefined' ) {
     res.redirect('./sessions');
   }else{
     var album = Album.init();
     var currentUser;
     User.findOne({_id: req.session.user._id}, function(error, fetchedUser) {
-      if(!error) {
+      if(!error && fetchedUser) {
         currentUser = fetchedUser;
         if(!currentUser.receivedFreeStickers) { giveBeginnersFreeStickers(currentUser, album); }
-        console.log("Fetching user: " +currentUser.gluedStickers);
-        res.render('index', { user: currentUser, album: album });
+        res.render('index', { currentUser: currentUser, user: currentUser, album: album });
       }
     });
   }
