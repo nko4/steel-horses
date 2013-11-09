@@ -3,8 +3,8 @@ var mongoose = require('mongoose')
   , ObjectId = Schema.ObjectId;
 
 var userSchema = new Schema({
-    name: String,
-    email: String
+    email: String,
+    password: String
 });
 
 module.exports = mongoose.model('User', userSchema);
