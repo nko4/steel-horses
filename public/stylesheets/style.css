@@ -239,3 +239,10 @@ vertical-align: top;
   padding-right: 10px
 }
 
+.notification-desc {
+  vertical-align: top;
+}
+.notification-desc span {
+  vertical-align: top;
+}
+

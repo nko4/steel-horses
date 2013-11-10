@@ -14,14 +14,18 @@
             <div class="notification-thumb">
               <img class="trade-what-image"></img>
             </div>
+            <span class="notification-desc">
             <span class="trade-what-number"></span> by <span class="trade-what-author"></span>
+            </span>
           </div>
          <strong>for</strong>
          <div class="trade-one-item">
            <div class="notification-thumb">
               <img class="trade-for-image"></img>
            </div>
+            <span class="notification-desc">
            <span class="trade-for-number"></span> by <span class="trade-for-author"></span>
+  </span>
          </div>
          <a href="#" class="btn btn-primary accept-trade" onclick="">Yep</a>
          <a href="#" class="btn btn-danger destroy-notification" >Nope</a>
@@ -160,6 +164,7 @@
     socket.on("TradeFinished", function (data) {
       $('input[value="'+data.offerId+'"]').closest("li").remove();
       receivedSticker(data.add);
+      removeSticker(data.remove);
     });
 
     socket.on("TradeRequest", function (data) {
