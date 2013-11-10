@@ -91,6 +91,11 @@
     item.removeClass("hide");
     $("#stickers-list").append(item);
   }
+
+  function removeSticker(sticker) {
+    $("input[val=" + sticker.number + "]").closest("li").remove();
+  }
+
     function acceptTrade(offerId, xSticker, xId, ySticker, yId) {
       var data = {offerId: offerId, xStickerNumber: xSticker, xId: xId, yStickerNumber: ySticker, yId: yId};
       socket.emit("acceptedTrade", data);
@@ -143,9 +148,12 @@
     socket.on("TradeExpired", function (stickerNumber) {
       alert("Offer expired");
     });
+ 
+    socket.on("DismissOffer", function (stickerNumber) {
+    });
 
     socket.on("TradeFinished", function (data) {
-      alert("Add " + data.add + " - " + " Remove " + data.remove);
+      receivedSticker(data.add);
     });
 
     socket.on("TradeRequest", function (data) {
@@ -159,6 +167,7 @@
       notification.find(".trade-for-image").attr('src', data.offeredSticker.image);
       notification.find(".trade-for-image").attr('width', '100px');
       notification.find(".trade-for-author").text( data.offeredSticker.author);
+      notification.find(".offer-id").val( data.offerId);
       var sendParams = "acceptTrade('"+data.offerId+"',"+data.offeredSticker.number+",'"+ selfId +"',"+data.suggestedSticker.number+",'"+data.requesterId+"')";
       notification.find(".accept-trade").attr("onclick", sendParams);
       notification.removeClass("hide");
