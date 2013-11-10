@@ -145,11 +145,13 @@ io.sockets.on('connection', function(client){
       sendSpecificSticker(data.yId, data.yStickerNumber, data.xStickerNumber);
       var xSocket = findSocketForUserId(data.xId);
       var ySocket = findSocketForUserId(data.yId);
+      var xFetchedSticker = album.findStickerByNumber(data.xStickerNumber);
+      var yFetchedSticker = album.findStickerByNumber(data.yStickerNumber);
       if(xSocket) {
-        xSocket.emit("TradeFinished", {remove: data.yStickerNumber, add: data.xStickerNumber});
+        xSocket.emit("TradeFinished", {remove: yFetchedSticker, add: xFetchedSticker});
       }
       if(ySocket) {
-        ySocket.emit("TradeFinished", {add: data.yStickerNumber, remove: data.xStickerNumber});
+        ySocket.emit("TradeFinished", {add: yFetchedSticker, remove: xFetchedSticker});
       }
       client.broadcast.emit("DismissOffer", data.offerId);
     }else{
