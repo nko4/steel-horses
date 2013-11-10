@@ -4,7 +4,9 @@ require('nko')('w0_XXuWDPdZYcRFP');
 var express = require('express')
   ,  app = express()
   ,  http = require('http')
-  ,  server = http.createServer(app)
+  ,  isProduction = (process.env.NODE_ENV === 'production')
+  ,  port = (isProduction ? 80 : 8080)
+  ,  server = http.createServer(app).listen(port)
   ,  io = require('socket.io').listen(server)
   ,  path = require('path')
   ,  mongoose = require('mongoose')
@@ -16,7 +18,6 @@ var albums = require('./routes/albums');
 var routes = require('./routes');
 var User = require('./models/user');
 
-app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(partials());
@@ -48,8 +49,6 @@ io.configure('production', function(){
     , 'jsonp-polling'
   ]);
 });
-
-server.listen(app.get('port'));
 
 app.get('/', routes.index);
 app.get('/sessions', sessions.index);
