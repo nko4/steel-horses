@@ -192,3 +192,8 @@ iframe {
   margin-top:5px;
   margin-bottom: 5px;
 }
+
+.sessions .info{
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 18px;
+}
