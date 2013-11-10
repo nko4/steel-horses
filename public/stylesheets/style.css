@@ -103,8 +103,6 @@ form {
 }
 
 #my {
-  width: 300px;
-  height: 610px;
   margin-right: 10px;
   background-color: #FFF;
   font-family: 'Sintony', sans-serif !important;
@@ -124,51 +122,53 @@ form {
 
 #people {
   background-color: #FFF;
+  overflow-y: scroll;
 }
 
-#people-list {
-  padding-top: 10px;
-  padding-bottom: 10px;
+#people ul {
   font-family: 'Sintony', sans-serif !important;
   color: #F1684E;
   padding-right: 10px;
   background-color: #FFF;
+  padding: 5px;
+  white-space:nowrap;
+  height: 60px;
 }
 
-#people-list .person {
-  color: #F1684E;
-  background-color: #1B1B1B;
-  margin-bottom:1px;
-  overflow: hidden;
-  margin-left: -30px;
-  padding: 5px;
+#people ul li {
   color: #FFF;
+  background-color: #1B1B1B;
+  margin-right:1px;
+  padding: 5px;
+  display: inline-block;
   list-style-type: none;
+  width: 222px;
 }
 
 .album-owner {
   font-family: 'Sintony', sans-serif !important;
 }
 
-#my-stickers .stickers-list-item {
+#my ul li {
   color: #F1684E;
   background-color: #1B1B1B;
-  margin-bottom:1px;
-  overflow: hidden;
-  width: 100%;
+  margin-right:-4px;
   padding: 5px;
+  display: inline-block;
   list-style-type: none;
+  width: 222px;
 }
-#my-stickers .stickers-list-item small{
+
+#my ul li small{
   font-size: 10px;
   color: #FFF;
 }
 
-#my-stickers .stickers-list-item .sticker-thumb img{
+#my ul li .sticker-thumb img{
   width: 100px;
 }
 
-#my-stickers .stickers-list-item .sticker-thumb{
+#my ul li .sticker-thumb{
   width:80px;
   height:50px;
   float: left;
@@ -176,8 +176,11 @@ form {
   margin-right: 5px;
 }
 
-#stickers-list {
-  padding-left: 15px;
+#my ul {
+  padding: 5px;
+  white-space:nowrap;
+  height: 60px;
+
 }
 
 .ajax-my-album {

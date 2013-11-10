@@ -4,16 +4,12 @@
 
 <input type="hidden" id="current-user-id" value="<%= user._id %>" />
 
-<div class="row">
-  <div id="my-stickers" class="col-md-3">
-    <%- partial('my_stickers.ejs', {locals: {album: album, user: user}}) %>
-  </div>
+<%- partial('my_stickers.ejs', {locals: {album: album, user: user}}) %>
 
   <h3 class="album-owner"><%= user.username %>'s album</h3>
-  <div id="current-album"  class="col-md-8">
+  <div id="current-album">
     <%- partial('album.ejs', {locals: {album: album, user: user}}) %>
   </div>
-</div>
 
 <script>
   $(function() {

@@ -1,6 +1,8 @@
 <ul id="mainTabs" class="nav nav-tabs">
   <li><a href="#my" data-toggle="tab">My Stickers</a></li>
   <li><a href="#people" data-toggle="tab">People</a></li>
+
+  <a href="#" onclick="showAlbum('<%= user._id %>','<%= user.username %>')" class="exchange-sticker btn btn-primary ajax-my-album">My Album</a>
 </ul>
 
 <div class="tab-content">
@@ -36,7 +38,6 @@
   </div>
   
   <div class="tab-pane" id="people">
-    <center><a href="#" onclick="showAlbum('<%= user._id %>','<%= user.username %>')" class="exchange-sticker btn btn-primary btn-xs ajax-my-album">My Album</a></center>
     <ul id="people-list" >
     </ul>
   </div>

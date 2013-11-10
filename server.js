@@ -70,6 +70,7 @@ io.sockets.on('connection', function(client){
         return;
       }
     }
+    client.broadcast.emit("allUsers", users);
   });
 
   client.on('userConnected', function (user) {
