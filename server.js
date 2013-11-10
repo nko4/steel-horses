@@ -148,14 +148,14 @@ io.sockets.on('connection', function(client){
       var xFetchedSticker = album.findStickerByNumber(data.xStickerNumber);
       var yFetchedSticker = album.findStickerByNumber(data.yStickerNumber);
       if(xSocket) {
-        xSocket.emit("TradeFinished", {remove: yFetchedSticker, add: xFetchedSticker});
+        xSocket.emit("TradeFinished", {offerId: data.offerId, remove: yFetchedSticker, add: xFetchedSticker});
       }
       if(ySocket) {
-        ySocket.emit("TradeFinished", {add: yFetchedSticker, remove: xFetchedSticker});
+        ySocket.emit("TradeFinished", {offerId: data.offerId, add: yFetchedSticker, remove: xFetchedSticker});
       }
       client.broadcast.emit("DismissOffer", data.offerId);
     }else{
-      client.emit("TradeExpired", data.yStickerNumber)
+      client.emit("TradeExpired", data.offerId);
     }
   });
 

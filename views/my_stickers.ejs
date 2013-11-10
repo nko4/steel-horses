@@ -145,14 +145,17 @@
       alert("No collector was found online with something interesting for you =(, try again later!");
     });
 
-    socket.on("TradeExpired", function (stickerNumber) {
+    socket.on("TradeExpired", function (offerId) {
       alert("Offer expired");
+      $('input[value="'+offerId+'"]').closest("li").remove();
     });
  
-    socket.on("DismissOffer", function (stickerNumber) {
+    socket.on("DismissOffer", function (offerId) {
+      $('input[value="'+offerId+'"]').closest("li").remove();
     });
 
     socket.on("TradeFinished", function (data) {
+      $('input[value="'+data.offerId+'"]').closest("li").remove();
       receivedSticker(data.add);
     });
 
