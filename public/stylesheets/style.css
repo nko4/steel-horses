@@ -139,6 +139,9 @@ form {
   list-style-type: none;
 }
 
+.album-owner {
+  font-family: 'Sintony', sans-serif !important;
+}
 
 #my-stickers .stickers-list-item {
   background-color: #c1c1c1;
