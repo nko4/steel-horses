@@ -207,16 +207,35 @@ iframe {
 
 }
 
-#notifications ul li {
-  color: #FFF;
-  background-color: #1B1B1B;
-  font-family: 'Sintony', sans-serif !important;
-  font-size: 12px;
-  margin-right:-4px;
-  padding: 5px;
-  display: inline-block;
-  list-style-type: none;
-  width: 100%;
+#notifications ul {
 }
 
+#notifications ul li {
+  background-color: #FFF;
+  color: #1B1B1B;
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 12px;
+  margin-right: 34px;
+  padding: 9px;
+  list-style-type: none;
+  margin-bottom: 2px;
+}
+
+
+#notifications .trade-item {
+  background-color: #FFF;
+}
+#notifications .trade-item a{
+vertical-align: top;
+}
+
+#notifications .trade-one-item {
+  display: inline-block;
+  background-color: #1B1B1B;
+  color: #FFF;
+  height: 65px;
+  width: 300px;
+  overflow: hidden;
+  padding-right: 10px
+}
 

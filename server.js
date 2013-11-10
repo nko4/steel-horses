@@ -225,17 +225,19 @@ function sendSticker(userId) {
   var sticker = album.getRandomSticker();
 
   User.findOne({_id: userId}, function (err, user) {
-    user.stickers.push(sticker.number);
+    if(user) {
+      user.stickers.push(sticker.number);
 
-    user.stickers = user.stickers;
+      user.stickers = user.stickers;
 
-    user.save(function (err) {
-      if(err) {
-        console.error('ERROR!');
-      } else {
-        console.log("A new sticker has arrived!");
-      }
-    });
+      user.save(function (err) {
+        if(err) {
+          console.error('ERROR!');
+        } else {
+          console.log("A new sticker has arrived!");
+        }
+      });
+    }
   });
   return sticker;
 }
