@@ -38,6 +38,18 @@ Album.prototype.getAllStickers = function() {
   return stickers;
 };
 
+Album.prototype.getAllStickersNumbers = function() {
+  var stickers = []; 
+  for(var i=0; i < this.pages.length; i++) {
+    var page = this.pages[i];
+    for(var j=0; j < page.stickers.length; j++) { 
+      stickers.push(page.stickers[j].number);
+    }
+  }
+  return stickers;
+};
+
+
 
 function createDefaultAlbum() {
 

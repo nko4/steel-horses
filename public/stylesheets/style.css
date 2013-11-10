@@ -197,3 +197,26 @@ iframe {
   font-family: 'Sintony', sans-serif !important;
   font-size: 18px;
 }
+
+.notification-thumb {
+  display: inline;
+  width:80px;
+  height:50px;
+  overflow:hidden;
+  margin-right: 5px;
+
+}
+
+#notifications ul li {
+  color: #FFF;
+  background-color: #1B1B1B;
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 12px;
+  margin-right:-4px;
+  padding: 5px;
+  display: inline-block;
+  list-style-type: none;
+  width: 100%;
+}
+
+

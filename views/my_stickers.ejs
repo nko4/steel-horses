@@ -1,11 +1,32 @@
 <ul id="mainTabs" class="nav nav-tabs">
   <li><a href="#my" data-toggle="tab">My Stickers</a></li>
   <li><a href="#people" data-toggle="tab">People</a></li>
-
+  <li><a href="#notifications" data-toggle="tab">Notifications</a></li>
   <a href="#" onclick="showAlbum('<%= user._id %>','<%= user.username %>')" class="exchange-sticker btn btn-primary ajax-my-album">My Album</a>
 </ul>
 
 <div class="tab-content">
+   <div class="tab-pane"id="notifications">
+     <ul>
+       <li class="trade-item skeleton hide">
+         <strong>Trade your: </strong>
+          <div class="notification-thumb">
+            <img class="trade-what-image"></img>
+          </div> 
+          <span class="trade-what-number"></span> by <span class="trade-what-author"></span>
+         
+         <strong>With:</strong>
+         <div class="notification-thumb">
+         <img class="trade-for-image"></img>
+         </div>
+         <span class="trade-for-number"></span> by <span class="trade-for-author"></span>
+         <a href="#" class="btn btn-primary accept-trade" onclick="">Yep</a>
+         <a href="#" class="btn btn-danger destroy-notification">Nope</a>
+       </li>
+     </ul>
+   </div>
+
+
   <div class="tab-pane active" id="my">
     <ul id="stickers-list" >
       <% myStickers = user.stickers %>
@@ -69,6 +90,11 @@
     item.removeClass("hide");
     $("#stickers-list").append(item);
   }
+    function acceptTrade(offerId, xSticker, xId, ySticker, yId) {
+      var data = {offerId: offerId, xStickerNumber: xSticker, xId: xId, yStickerNumber: ySticker, yId: yId};
+      socket.emit("acceptedTrade", data);
+    }
+
 
   $(function() {
     $('#mainTabs a:first').tab('show');
@@ -93,6 +119,41 @@
 
     socket.on("receivedNewSticker", function (sticker) {
       receivedSticker(sticker);
+    });
+    
+    function startTrade(stickerNumber) {
+      socket.emit("startTrade", {userId: '<%= user._id %>', stickerNumber: stickerNumber});
+    }
+
+    $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
+      var row = $(this).closest('li');
+      var stickerNumber = row.find('input:hidden').val();
+      startTrade(stickerNumber);
+    });
+
+    socket.on("NoTraderWasFound", function (stickerNumber) {
+      alert("No collector was found online with something interesting for you =(, try again later!");
+    });
+ 
+    socket.on("TradeExpired", function (stickerNumber) {
+      alert("Offer expired");
+    });
+ 
+    socket.on("TradeRequest", function (data) {
+      var selfId = "<%= user._id %>";
+      var notification = $("#notifications ul li.skeleton").clone();
+      notification.find(".trade-what-number").text(data.suggestedSticker.number);
+      notification.find(".trade-what-image").attr('src', data.suggestedSticker.image);
+      notification.find(".trade-what-image").attr('width', '100px');
+      notification.find(".trade-what-author").text(data.suggestedSticker.author);
+      notification.find(".trade-for-number").text(data.offeredSticker.number);
+      notification.find(".trade-for-image").attr('src', data.offeredSticker.image);
+      notification.find(".trade-for-image").attr('width', '100px');
+      notification.find(".trade-for-author").text( data.offeredSticker.author);
+      var sendParams = "acceptTrade('"+data.offerId+"',"+data.offeredSticker.number+",'"+ selfId +"',"+data.suggestedSticker.number+",'"+data.requesterId+"')";
+      notification.find(".accept-trade").attr("onclick", sendParams);
+      notification.removeClass("hide");
+      $("#notifications ul").append(notification);    
     });
 
     socket.on("tryTradeSticker", function (currentUser, usersToTrade, stickerNumber) {
