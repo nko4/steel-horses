@@ -15,13 +15,14 @@
           </div> 
           <span class="trade-what-number"></span> by <span class="trade-what-author"></span>
          
+          <input type="hidden" class="offer-id" value="" />
          <strong>With:</strong>
          <div class="notification-thumb">
          <img class="trade-for-image"></img>
          </div>
          <span class="trade-for-number"></span> by <span class="trade-for-author"></span>
          <a href="#" class="btn btn-primary accept-trade" onclick="">Yep</a>
-         <a href="#" class="btn btn-danger destroy-notification">Nope</a>
+         <a href="#" class="btn btn-danger destroy-notification" >Nope</a>
        </li>
      </ul>
    </div>
@@ -66,7 +67,8 @@
 
 
 <script>
-  function showAlbum(userId, username) {
+ function showAlbum(userId, username) {
+
     $("#current-album").empty();
     $.get( "/albums/" + userId, function( data ) {
         var album = $(data);
@@ -125,6 +127,10 @@
       socket.emit("startTrade", {userId: '<%= user._id %>', stickerNumber: stickerNumber});
     }
 
+    $('#notifications').delegate("a.destroy-notification", "click" , function(){
+      $(this).closest('li').fadeOut(1000).remove();      
+    });
+
     $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
       var row = $(this).closest('li');
       var stickerNumber = row.find('input:hidden').val();
@@ -171,5 +177,18 @@
       //  //alert("The user denied the trade");
       //}
     });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+       if($('.nav-tabs .active').text() == "Notifications"){
+        $("#current-album").hide();
+        $(".album-owner").hide();
+        }else{
+        $("#current-album").show();
+        $(".album-owner").show();
+
+      }
+    });
+
   });
+
 </script>
