@@ -126,6 +126,7 @@ form {
   padding-top: 10px;
   padding-bottom: 10px;
   font-family: 'Sintony', sans-serif !important;
+  color: #F1684E;
   padding-right: 10px;
   background-color: #1B1B1B;
 }
@@ -136,6 +137,7 @@ form {
   overflow: hidden;
   margin-left: -30px;
   padding: 5px;
+  color: #000;
   list-style-type: none;
 }
 
@@ -170,3 +172,7 @@ form {
   padding-left: 15px;
 }
 
+.ajax-my-album {
+  margin-top:5px;
+  margin-bottom: 5px;
+}

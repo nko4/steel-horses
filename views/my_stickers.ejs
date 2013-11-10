@@ -24,6 +24,7 @@
   </div>
   
   <div class="tab-pane" id="people">
+    <center><a href="#" onclick="showAlbum('<%= user._id %>','<%= user.username %>')" class="exchange-sticker btn btn-primary btn-xs ajax-my-album">My Album</a></center>
     <ul id="people-list" >
     </ul>
   </div>
@@ -53,6 +54,7 @@
     function loadPeople(people){
       var selfId = "<%= user._id %>";
       $("#people-list").empty();
+      if(people.length == 0){ $("#people-list").append("There is no user online right now"); }
       for(var i=0; i<people.length; i++){
         var person = people[i];
         if(person.id != selfId) {
