@@ -103,14 +103,13 @@ io.sockets.on('connection', function(client){
     for(var i=0; i< users.length; i++) {
       var userToTrade = users[i];
 
-      var fu = User.findOne({username: userToTrade.username}, function(error, user) {
+      User.findOne({username: userToTrade.username}, function(error, user) {
         if(user && user.gluedStickers.indexOf(data.stickerNumber) == -1) {
           usersToTrade.push(user);
         }
       });
     }
 
-    console.log(fu);
     client.broadcast.emit('tryTradeSticker', data.userId, usersToTrade, data.stickerNumber);
   });
 
