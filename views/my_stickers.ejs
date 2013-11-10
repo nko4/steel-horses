@@ -13,9 +13,21 @@
           <div class="sticker-thumb">
           <img src="<%= sticker.image %>" />
           </div>
-          <%= sticker.number %> <small>by <%= sticker.author %></small>
+          <span class="sticker-capital-number"><%= sticker.number %></span> <small>by <%= sticker.author %></small>
           <br />
           <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
+          <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
+          <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
+        </li>
+      <% } %>
+      <% if(myStickers.length == 0) { %>
+        <li class="stickers-list-item skeleton hide">
+          <div class="sticker-thumb">
+          <img src="#" />
+          </div>
+          <span class="sticker-capital-number"></span> <small></small>
+          <br />
+          <input type="hidden" name="sticker-number" value="" />
           <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
           <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
         </li>
@@ -47,9 +59,18 @@
     }); 
   }
 
+  function receivedSticker(sticker) {
+    var item = $(".stickers-list-item").first().clone();
+    item.find("img").attr("src", sticker.image);
+    item.find("small").html("by "+ sticker.author);
+    item.find("span").html(sticker.number);
+    item.find("input").val(sticker.number);
+    item.removeClass("hide");
+    $("#stickers-list").append(item);
+  }
+
   $(function() {
     $('#mainTabs a:first').tab('show');
-
 
     function loadPeople(people){
       var selfId = "<%= user._id %>";
@@ -67,7 +88,13 @@
     socket.emit("getAllUsers");
     socket.on('allUsers', function (data) {
       loadPeople(data);
-      });
     });
+
+    socket.on("receivedNewSticker", function (sticker) {
+      receivedSticker(sticker);
+    });
+
+  });
+
 </script>
  

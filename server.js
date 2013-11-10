@@ -92,13 +92,9 @@ io.sockets.on('connection', function(client){
     glueSticker(data.userId, data.stickerNumber);
   });
 
-  client.on('userReceivedSticker', function (data) {
-    console.log("Giving sticker " + data.stickerNumber + " to " + data.userId);
-  });
-
   client.on('itsTimeToSendSticker', function (data) {
-    console.log("Sending a new sticker");
-    sendSticker(data.userId);
+    var sticker = sendSticker(data.userId);
+    client.emit("receivedNewSticker", sticker);
   });
 
   var countdown = 10;
@@ -127,6 +123,7 @@ function sendSticker(userId) {
       }
     });
   });
+  return sticker;
 }
 
 function glueSticker(userId, stickerNumber) {

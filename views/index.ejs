@@ -31,7 +31,7 @@
     var onlineUser= {id: "<%= user._id %>", username: "<%= user.username %>"};
     socket.emit('userConnected', onlineUser);
 
-    $('.glue-sticker').click(function(){
+    $('#stickers-list').delegate("a.glue-sticker", "click" , function(){
       var row = $(this).closest('li');
       var stickerNumber = row.find('input:hidden').val()
       if($('#sticker-' + stickerNumber).hasClass("hide")) {
@@ -62,6 +62,6 @@
 
     setInterval(function() {
       socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
-    }, 100000);
+    }, 10 * 60 * 60);
   });
 </script>
