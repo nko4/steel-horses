@@ -100,7 +100,8 @@
   }
 
   function removeSticker(sticker) {
-    $("input[val=" + sticker.number + "]").closest("li").remove();
+    var elem = $('input:hidden[name="sticker-number"][value="'+sticker.number+'"]');
+    elem.closest("li").remove();
   }
 
     function acceptTrade(offerId, xSticker, xId, ySticker, yId) {
