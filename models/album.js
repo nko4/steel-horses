@@ -43,6 +43,7 @@ function createDefaultAlbum() {
 
   stickersImagePath = '/images/stickers/default/';
   var pages = [];
+  pages.push(new AlbumPage({stickers: [], number: 0, image: '/images/pages/default/cover.jpeg'}));
 
   // MISS VAN
   var missVanPageOneStickers = [];
@@ -133,6 +134,61 @@ function createDefaultAlbum() {
   pages.push(new AlbumPage({stickers: ratPageOneStickers, number: 11, image: '/images/pages/default/le-rat.jpeg'}));
   pages.push(new AlbumPage({stickers: ratPageTwoStickers, number: 12, image: '/images/pages/default/le-rat.jpeg'}));
   pages.push(new AlbumPage({stickers: ratPageThreeStickers, number: 13, image: '/images/pages/default/le-rat.jpeg'}));
+
+  // BANKSY
+  var author = "Banksy";
+  var banksyPageOneStickers = [];
+  banksyPageOneStickers.push(new Sticker({ author: author, x: 5, y: 10, image: stickersImagePath + 'banksy-1.jpeg', number: 36, width: 380, height: 253}));
+  banksyPageOneStickers.push(new Sticker({ author: author, x: 5, y: 310, image: stickersImagePath + 'banksy-2.jpeg', number: 37, width: 380, height: 285}));
+
+  var banksyPageTwoStickers = [];
+  banksyPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'banksy-3.jpeg', number: 38, width: 190, height: 246}));
+  banksyPageTwoStickers.push(new Sticker({ author: author, x: 210, y: 10, image: stickersImagePath + 'banksy-4.jpeg', number: 39, width: 180, height: 231}));
+  banksyPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'banksy-5.jpeg', number: 40, width: 380, height: 266}));
+
+  var banksyPageThreeStickers = [];
+  banksyPageThreeStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'banksy-6.jpeg', number: 41, width: 380, height: 238}));
+  banksyPageThreeStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'banksy-7.jpeg', number: 42, width: 180, height: 286}));
+  banksyPageThreeStickers.push(new Sticker({ author: author, x: 210, y: 310, image: stickersImagePath + 'banksy-8.jpeg', number: 43, width: 180, height: 142}));
+
+  pages.push(new AlbumPage({stickers: banksyPageOneStickers, number: 14, image: '/images/pages/default/banksy.jpeg'}));
+  pages.push(new AlbumPage({stickers: banksyPageTwoStickers, number: 15, image: '/images/pages/default/banksy.jpeg'}));
+  pages.push(new AlbumPage({stickers: banksyPageThreeStickers, number: 16, image: '/images/pages/default/banksy.jpeg'}));
+  
+  // FAIREY
+  var author = "Shepard Fairey";
+  var faireyPageOneStickers = [];
+  faireyPageOneStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'fairey-1.jpeg', number: 44, width: 380, height: 230}));
+  faireyPageOneStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'fairey-2.jpeg', number: 45, width: 380, height: 230}));
+
+  var faireyPageTwoStickers = [];
+  faireyPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'fairey-3.jpeg', number: 46, width: 180, height: 253}));
+  faireyPageTwoStickers.push(new Sticker({ author: author, x: 210, y: 10, image: stickersImagePath + 'fairey-4.jpeg', number: 47, width: 180, height: 232}));
+  faireyPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'fairey-5.jpeg', number: 48, width: 380, height: 213}));
+
+  var faireyPageThreeStickers = [];
+  faireyPageThreeStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'fairey-6.jpeg', number: 49, width: 380, height: 222}));
+  faireyPageThreeStickers.push(new Sticker({ author: author, x: 100, y: 250, image: stickersImagePath + 'fairey-7.jpeg', number: 50, width: 225, height: 300}));
+
+  pages.push(new AlbumPage({stickers: faireyPageOneStickers, number: 14, image: '/images/pages/default/fairey.jpeg'}));
+  pages.push(new AlbumPage({stickers: faireyPageTwoStickers, number: 15, image: '/images/pages/default/fairey.jpeg'}));
+  pages.push(new AlbumPage({stickers: faireyPageThreeStickers, number: 16, image: '/images/pages/default/fairey.jpeg'}));
+ 
+  // OSGEMEOS
+  var author = "OsGemeos";
+  var osgemeosPageOneStickers = [];
+  osgemeosPageOneStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'osgemeos-1.jpeg', number: 51, width: 380, height: 285}));
+  osgemeosPageOneStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'osgemeos-2.jpeg', number: 52, width: 380, height: 285}));
+
+  var osgemeosPageTwoStickers = [];
+  osgemeosPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 10, image: stickersImagePath + 'osgemeos-3.jpeg', number: 53, width: 180, height: 263}));
+  osgemeosPageTwoStickers.push(new Sticker({ author: author, x: 210, y: 10, image: stickersImagePath + 'osgemeos-4.jpeg', number: 54, width: 180, height: 273}));
+  osgemeosPageTwoStickers.push(new Sticker({ author: author, x: 10, y: 310, image: stickersImagePath + 'osgemeos-5.jpeg', number: 55, width: 380, height: 253}));
+
+  pages.push(new AlbumPage({stickers: osgemeosPageOneStickers, number: 14, image: '/images/pages/default/osgemeos.jpeg'}));
+  pages.push(new AlbumPage({stickers: osgemeosPageTwoStickers, number: 15, image: '/images/pages/default/osgemeos.jpeg'}));
+
+  pages.push(new AlbumPage({stickers: [], number: 16, image: '/images/pages/default/back.jpeg'}));
 
   var album = new Album({pages: pages, name: 'Default', namespace: 'default', width: 800});
   return album;
