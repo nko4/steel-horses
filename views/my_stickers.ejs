@@ -1,18 +1,71 @@
-<h4><small>My Stickers</small></h4>
-<ul id="stickers-list" >
-  <% myStickers = user.stickers %>
-  <% for(var i=0; i < myStickers.length; i++) { %>
-    <% var sticker = album.findStickerByNumber(myStickers[i]); %>
-    <li class="stickers-list-item">
-      <div class="sticker-thumb">
-      <img src="<%= sticker.image %>" />
-      </div>
-      <%= sticker.number %> <small>by <%= sticker.author %></small>
-      <br />
-      <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
-      <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
-      <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
-    </li>
-  <% } %>
+<ul id="mainTabs" class="nav nav-tabs">
+  <li><a href="#my" data-toggle="tab">My Stickers</a></li>
+  <li><a href="#people" data-toggle="tab">People</a></li>
 </ul>
 
+<div class="tab-content">
+  <div class="tab-pane active" id="my">
+    <ul id="stickers-list" >
+      <% myStickers = user.stickers %>
+      <% for(var i=0; i < myStickers.length; i++) { %>
+        <% var sticker = album.findStickerByNumber(myStickers[i]); %>
+        <li class="stickers-list-item">
+          <div class="sticker-thumb">
+          <img src="<%= sticker.image %>" />
+          </div>
+          <%= sticker.number %> <small>by <%= sticker.author %></small>
+          <br />
+          <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
+          <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
+          <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+  
+  <div class="tab-pane" id="people">
+    <ul id="people-list" >
+    </ul>
+  </div>
+</div>
+
+
+<script>
+  function showAlbum(userId, username) {
+    $("#current-album").empty();
+    $.get( "/albums/" + userId, function( data ) {
+        var album = $(data);
+        $("#current-album").html( album.html() );
+        $('#current-album').booklet({
+          width: 800,
+          height: 600,
+          keyboard: true,
+          pagePadding: 0
+        });
+        $(".album-owner").text(username +"'s album");
+    }); 
+  }
+
+  $(function() {
+    $('#mainTabs a:first').tab('show');
+
+
+    function loadPeople(people){
+      var selfId = "<%= user._id %>";
+      $("#people-list").empty();
+      for(var i=0; i<people.length; i++){
+        var person = people[i];
+        if(person.id != selfId) {
+          var args = "'" + person.id + "','" + person.username + "'";
+          var func  =  "showAlbum(" +args+ ")";
+          $("#people-list").append("<li class='person'>" + person.username + "<br/><a class='btn btn-primary btn-xs' href='#' onclick="+func+">Show Album</a></li>");
+        }
+      }        
+    }
+    socket.emit("getAllUsers");
+    socket.on('allUsers', function (data) {
+      loadPeople(data);
+      });
+    });
+</script>
+ 

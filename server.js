@@ -57,12 +57,34 @@ app.get('/albums/:user_id?', albums.index);
 app.post('/sessions', sessions.create);
 
 var clients = [];
+var users = [];
 
 io.sockets.on('connection', function(client){
   clients.push(client);
 
   client.on('disconnect', function() {
     clients.splice(clients.indexOf(client), 1);
+    for(var i=0; i< users.length; i++){
+      if(users[i].socket == client.id) {
+        users.splice(i, 1);
+        return;
+      }
+    }
+  });
+
+  client.on('userConnected', function (user) {
+    for(var i=0; i< users.length; i++){
+      if(users[i].id == user.id) {
+        return;
+      }
+    }
+    user.socket = client.id;
+    users.push(user);
+    client.broadcast.emit("allUsers", users);
+  });
+
+  client.on('getAllUsers', function () {
+    client.emit("allUsers", users);
   });
 
   client.on('userGluedSticker', function (data) {

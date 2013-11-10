@@ -10,7 +10,7 @@ exports.index = function(req, res){
   }
   User.findOne({_id: userId}, function(error, fetchedUser) {
     if(!error) {
-      res.render('./albums/index', {currentUser: currentUser, user: fetchedUser, album: album});
+      res.render('./albums/index', {layout: false, currentUser: currentUser, user: fetchedUser, album: album});
     }
   });
 };

@@ -9,6 +9,10 @@ html {
   margin: 0;
   padding: 0;
 }
+form {
+  padding: 10px;
+  padding-left: 20px;
+}
 
 .page-header {
   background-color: #1B1B1B;
@@ -93,10 +97,14 @@ html {
   border: 3px inset #FFF;
 }
 
-#my-stickers {
+#mainTabs {
+  font-family: 'Sintony', sans-serif !important;
+  font-size: 16px;
+}
+
+#my {
   width: 300px;
-  height: 600px;
-  background-color: #1B1B1B;
+  height: 610px;
   margin-right: 10px;
   font-family: 'Sintony', sans-serif !important;
   font-size: 16px;
@@ -107,6 +115,30 @@ html {
   color: #F1684E;
   padding: 15px;
 }
+#my-stickers #stickers-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  background-color: #1B1B1B;
+}
+
+#people-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Sintony', sans-serif !important;
+  padding-right: 10px;
+  background-color: #1B1B1B;
+}
+
+#people-list .person {
+  background-color: #c1c1c1;
+  margin-bottom:1px;
+  overflow: hidden;
+  margin-left: -30px;
+  padding: 5px;
+  list-style-type: none;
+}
+
 
 #my-stickers .stickers-list-item {
   background-color: #c1c1c1;

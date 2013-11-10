@@ -5,10 +5,11 @@
 <input type="hidden" id="current-user-id" value="<%= user._id %>" />
 
 <div class="row">
-  <div id="my-stickers" class="col-md-4">
+  <div id="my-stickers" class="col-md-3">
     <%- partial('my_stickers.ejs', {locals: {album: album, user: user}}) %>
   </div>
 
+  <h3 class="album-owner"><%= user.username %>'s album</h3>
   <div id="current-album"  class="col-md-8">
     <%- partial('album.ejs', {locals: {album: album, user: user}}) %>
   </div>
@@ -26,6 +27,9 @@
     var gluedStickers = [<%= user.gluedStickers %>];
     var stickers = [<%= user.stickers %>];
     var albumSize = <%= album.getAllStickers().length %>;
+
+    var onlineUser= {id: "<%= user._id %>", username: "<%= user.username %>"};
+    socket.emit('userConnected', onlineUser);
 
     $('.glue-sticker').click(function(){
       var row = $(this).closest('li');
