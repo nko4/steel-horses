@@ -13,6 +13,12 @@
 
 <script>
   $(function() {
+    setInterval(function() {
+      socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
+    }, 600000);
+  });
+
+  $(function() {
     $('#current-album').booklet({
       width: <%= album.width %>,
       height: <%= album.height %>,
@@ -32,7 +38,7 @@
 
     $('#stickers-list').delegate("a.glue-sticker", "click" , function(){
       var row = $(this).closest('li');
-      var stickerNumber = row.find('input:hidden').val()
+      var stickerNumber = row.find('input:hidden').val();
       if($('#sticker-' + stickerNumber).hasClass("hide")) {
         $('#sticker-' + stickerNumber).removeClass("hide");
         $('#placeholder-' + stickerNumber).fadeOut(300);
@@ -53,13 +59,14 @@
       $('.progress').text(percentage + "% Completed -");
     }
     updateProgress();
-  });
-</script>
 
-<script>
-  $(function() {
-    setInterval(function() {
-      socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
-    }, 600000);
+    $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
+      var row = $(this).closest('li');
+      var stickerNumber = row.find('input:hidden').val();
+
+      socket.emit('letsTradeSticker', { userId: $('#current-user-id').val(), stickerNumber: stickerNumber });
+
+      return false
+    });
   });
 </script>

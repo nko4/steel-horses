@@ -19,7 +19,7 @@
           <br />
           <input type="hidden" name="sticker-number" value="<%= sticker.number %>" />
           <a href="#" class="glue-sticker btn btn-warning btn-xs">Glue</a>
-          <a href="#" class="exchange-sticker btn btn-primary btn-xs">Exchange</a>
+          <a href="#" class="exchange-sticker btn btn-primary btn-xs">Trade</a>
         </li>
       <% } %>
       <% if(myStickers.length == 0) { %>
@@ -36,7 +36,7 @@
       <% } %>
     </ul>
   </div>
-  
+
   <div class="tab-pane" id="people">
     <ul id="people-list" >
     </ul>
@@ -57,7 +57,7 @@
           pagePadding: 0
         });
         $(".album-owner").text(username +"'s album");
-    }); 
+    });
   }
 
   function receivedSticker(sticker) {
@@ -84,7 +84,7 @@
           var func  =  "showAlbum(" +args+ ")";
           $("#people-list").append("<li class='person'>" + person.username + "<br/><a class='btn btn-primary btn-xs' href='#' onclick="+func+">Show Album</a></li>");
         }
-      }        
+      }
     }
     socket.emit("getAllUsers");
     socket.on('allUsers', function (data) {
@@ -95,7 +95,16 @@
       receivedSticker(sticker);
     });
 
-  });
+    socket.on("tryTradeSticker", function (currentUser, usersToTrade, stickerNumber) {
+      var message = "The user " + currentUser + " wants to trade sticker number " + stickerNumber + " for some sticker that is not glued on yout album. Let's trade?";
 
+      var trade = confirm(message);
+
+      if(trade == true){
+        alert("Trade accepted");
+      }else{
+        alert("The user denied the trade");
+      }
+    });
+  });
 </script>
- 

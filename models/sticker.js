@@ -14,4 +14,8 @@ function Sticker(attributes) {
   this.author = attributes.author;
 }
 
+function tradeSticker(currentUser, user) {
+
+}
+
 module.exports = Sticker;
