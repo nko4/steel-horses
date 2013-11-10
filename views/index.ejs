@@ -23,7 +23,7 @@
       width: <%= album.width %>,
       height: <%= album.height %>,
       keyboard: true,
-      pagePadding: 0, 
+      pagePadding: 0,
       arrows: true,
       speed: 300,
       closed: true
@@ -59,14 +59,5 @@
       $('.progress').text(percentage + "% Completed -");
     }
     updateProgress();
-
-    $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
-      var row = $(this).closest('li');
-      var stickerNumber = row.find('input:hidden').val();
-
-      socket.emit('letsTradeSticker', { userId: $('#current-user-id').val(), stickerNumber: stickerNumber });
-
-      return false
-    });
   });
 </script>

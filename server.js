@@ -103,18 +103,6 @@ io.sockets.on('connection', function(client){
     client.emit("receivedNewSticker", sticker);
   });
 
-  client.on('letsTradeSticker', function (data) {
-    var usersToTrade = [];
-
-    for(var i=0; i< users.length; i++) {
-      usersToTrade.push(users[i].username);
-    }
-
-    User.find().where("username").in(usersToTrade).exec(function (error, users) {
-      client.broadcast.emit('tryTradeSticker', data.userId, users, data.stickerNumber);
-    });
-  });
-
   client.on('startTrade', function (data) {
     var stickerNumber = data.stickerNumber;
     var userId = data.userId;
@@ -153,8 +141,8 @@ io.sockets.on('connection', function(client){
       if(trades[i] == data.offerId) { go = true; break; }
     }
     if(go){
-      sendSpecificSticker(data.xId, data.xStickerNumber);
-      sendSpecificSticker(data.yId, data.yStickerNumber);
+      sendSpecificSticker(data.xId, data.xStickerNumber, data.yStickerNumber);
+      sendSpecificSticker(data.yId, data.yStickerNumber, data.xStickerNumber);
       var xSocket = findSocketForUserId(data.xId);
       var ySocket = findSocketForUserId(data.yId);
       if(xSocket) {
@@ -249,10 +237,12 @@ function sendSticker(userId) {
   return sticker;
 }
 
-
-function sendSpecificSticker(userId,stickerNumber) {
+function sendSpecificSticker(userId, stickerNumber, stickerToRemove) {
   User.findOne({_id: userId}, function (err, user) {
     user.stickers.push(stickerNumber);
+    var i = user.stickers.indexOf(stickerToRemove);
+    if(i != -1) { user.stickers.splice(i, 1); };
+
     user.save(function (err) {
       if(err) {
         console.error('ERROR!');

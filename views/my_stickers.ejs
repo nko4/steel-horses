@@ -12,9 +12,8 @@
          <strong>Trade your: </strong>
           <div class="notification-thumb">
             <img class="trade-what-image"></img>
-          </div> 
+          </div>
           <span class="trade-what-number"></span> by <span class="trade-what-author"></span>
-         
           <input type="hidden" class="offer-id" value="" />
          <strong>With:</strong>
          <div class="notification-thumb">
@@ -122,13 +121,13 @@
     socket.on("receivedNewSticker", function (sticker) {
       receivedSticker(sticker);
     });
-    
+
     function startTrade(stickerNumber) {
       socket.emit("startTrade", {userId: '<%= user._id %>', stickerNumber: stickerNumber});
     }
 
     $('#notifications').delegate("a.destroy-notification", "click" , function(){
-      $(this).closest('li').fadeOut(1000).remove();      
+      $(this).closest('li').fadeOut(1000).remove();
     });
 
     $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
@@ -140,13 +139,13 @@
     socket.on("NoTraderWasFound", function (stickerNumber) {
       alert("No collector was found online with something interesting for you =(, try again later!");
     });
- 
+
     socket.on("TradeExpired", function (stickerNumber) {
       alert("Offer expired");
     });
- 
+
     socket.on("TradeFinished", function (data) {
-      alert("Add " + data.add + " - " + " Remove " + data.remove); 
+      alert("Add " + data.add + " - " + " Remove " + data.remove);
     });
 
     socket.on("TradeRequest", function (data) {
@@ -163,19 +162,7 @@
       var sendParams = "acceptTrade('"+data.offerId+"',"+data.offeredSticker.number+",'"+ selfId +"',"+data.suggestedSticker.number+",'"+data.requesterId+"')";
       notification.find(".accept-trade").attr("onclick", sendParams);
       notification.removeClass("hide");
-      $("#notifications ul").append(notification);    
-    });
-
-    socket.on("tryTradeSticker", function (currentUser, usersToTrade, stickerNumber) {
-      //var message = "The user " + currentUser + " wants to trade sticker number " + stickerNumber + " for some sticker that is not glued on yout album. Let's trade?";
-
-      //var trade = confirm(message);
-
-      //if(trade == true){
-      //  //alert("Trade accepted");
-      //}else{
-      //  //alert("The user denied the trade");
-      //}
+      $("#notifications ul").append(notification);
     });
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
