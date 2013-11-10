@@ -179,7 +179,7 @@
     });
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-       if($('.nav-tabs .active').text() == "Notifications"){
+       if($('.nav-tabs .active').text().indexOf("Notifications") != -1){
         $("#current-album").hide();
         $(".album-owner").hide();
         }else{
