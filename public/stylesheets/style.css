@@ -106,6 +106,7 @@ form {
   width: 300px;
   height: 610px;
   margin-right: 10px;
+  background-color: #FFF;
   font-family: 'Sintony', sans-serif !important;
   font-size: 16px;
   overflow-y: scroll;
@@ -119,7 +120,10 @@ form {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 10px;
-  background-color: #1B1B1B;
+}
+
+#people {
+  background-color: #FFF;
 }
 
 #people-list {
@@ -128,16 +132,17 @@ form {
   font-family: 'Sintony', sans-serif !important;
   color: #F1684E;
   padding-right: 10px;
-  background-color: #1B1B1B;
+  background-color: #FFF;
 }
 
 #people-list .person {
-  background-color: #c1c1c1;
+  color: #F1684E;
+  background-color: #1B1B1B;
   margin-bottom:1px;
   overflow: hidden;
   margin-left: -30px;
   padding: 5px;
-  color: #000;
+  color: #FFF;
   list-style-type: none;
 }
 
@@ -146,14 +151,17 @@ form {
 }
 
 #my-stickers .stickers-list-item {
-  background-color: #c1c1c1;
+  color: #F1684E;
+  background-color: #1B1B1B;
   margin-bottom:1px;
   overflow: hidden;
   width: 100%;
+  padding: 5px;
   list-style-type: none;
 }
 #my-stickers .stickers-list-item small{
   font-size: 10px;
+  color: #FFF;
 }
 
 #my-stickers .stickers-list-item .sticker-thumb img{

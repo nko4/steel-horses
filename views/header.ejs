@@ -2,10 +2,10 @@
   <h3>Steel Stickers <small>Yet another old school virtual stickers album.</small></h3>
   <div class="user-info">
     <% if(typeof(user.username) != 'undefined') { %>
-      <div>Time until your next sticker <div id="counter">10</div> minutes</div>
+      <span>Time until your next sticker <span id="counter">10</span> minutes</span> | 
       <span class="progress"></span>
       <%= user.username %>
-      <a class="btn btn-primary btn-xs" href="/">My Album</a>
+      <!-- <a class="btn btn-primary btn-xs" href="/">My Album</a> -->
       <a class="btn btn-danger btn-xs" href="/sessions">Sign Out</a>
     <% } else { %>
       <a class="btn btn-primary btn-xs" href="/sessions">Sign in</a>
