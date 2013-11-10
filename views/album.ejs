@@ -11,7 +11,7 @@
       <div id="placeholder-<%= sticker.number %>" class="sticker-placeholder <%= placeholderStickerClass %>" style="margin-left: <%= sticker.x + 'px' %>; margin-top: <%= sticker.y + 'px' %>; height: <%= sticker.height + 'px' %>; width: <%= sticker.width + 'px' %>; position: absolute" >
           <h3><%= sticker.number %></h3>
        </div>
-      <% if((i % 2) == 0) { %> <div class="overlay-left-page"></div>
+      <% if((i % 2) == 1) { %> <div class="overlay-left-page"></div>
       <% } else { %> <div class="overlay-right-page"></div> <% } %>
     <% } %>
   </div>
