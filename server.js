@@ -116,7 +116,7 @@ io.sockets.on('connection', function(client){
       });
     }
 
-    client.broadcast.emit('tryTradeSticker', data.userId, usersToTrade, data.stickerNumber);
+//client.broadcast.emit('tryTradeSticker', data.userId, usersToTrade, data.stickerNumber);
   });
 
   client.on('startTrade', function (data) {
@@ -159,7 +159,14 @@ io.sockets.on('connection', function(client){
     if(go){
       sendSpecificSticker(data.xId, data.xStickerNumber);
       sendSpecificSticker(data.yId, data.yStickerNumber);
-      client.emit("TradeFinished", {x: data.xStickerNumber, y: data.yStickerNumber});
+      var xSocket = findSocketForUserId(data.xId);
+      var ySocket = findSocketForUserId(data.yId);
+      if(xSocket) {
+        xSocket.emit("TradeFinished", {remove: data.yStickerNumber, add: data.xStickerNumber});
+      }
+      if(ySocket) {
+        ySocket.emit("TradeFinished", {add: data.yStickerNumber, remove: data.xStickerNumber});
+      }
       client.broadcast.emit("DismissOffer", data.offerId);
     }else{
       client.emit("TradeExpired", data.yStickerNumber) 

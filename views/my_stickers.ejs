@@ -139,6 +139,10 @@
       alert("Offer expired");
     });
  
+    socket.on("TradeFinished", function (data) {
+      alert("Add " + data.add + " - " + " Remove " + data.remove); 
+    });
+
     socket.on("TradeRequest", function (data) {
       var selfId = "<%= user._id %>";
       var notification = $("#notifications ul li.skeleton").clone();
@@ -157,15 +161,15 @@
     });
 
     socket.on("tryTradeSticker", function (currentUser, usersToTrade, stickerNumber) {
-      var message = "The user " + currentUser + " wants to trade sticker number " + stickerNumber + " for some sticker that is not glued on yout album. Let's trade?";
+      //var message = "The user " + currentUser + " wants to trade sticker number " + stickerNumber + " for some sticker that is not glued on yout album. Let's trade?";
 
-      var trade = confirm(message);
+      //var trade = confirm(message);
 
-      if(trade == true){
-        alert("Trade accepted");
-      }else{
-        alert("The user denied the trade");
-      }
+      //if(trade == true){
+      //  //alert("Trade accepted");
+      //}else{
+      //  //alert("The user denied the trade");
+      //}
     });
   });
 </script>
