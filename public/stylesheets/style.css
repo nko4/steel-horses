@@ -14,6 +14,10 @@ form {
   padding-left: 20px;
 }
 
+iframe {
+  float: right;
+}
+
 .page-header {
   background-color: #1B1B1B;
   font-family: 'Sintony', sans-serif !important;
@@ -71,7 +75,7 @@ form {
 }
 
 #current-album .sticker-placeholder {
-  background-color: #FFF; 
+  background-color: #FFF;
   position: absolute;
   opacity: 0.4;
 }
@@ -79,7 +83,7 @@ form {
 #current-album .sticker-placeholder h3 {
   margin: 10px;
   color: #000;
-  
+
 }
 
 #current-album .b-counter {

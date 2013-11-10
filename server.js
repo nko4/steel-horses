@@ -102,6 +102,11 @@ io.sockets.on('connection', function(client){
 
   setInterval(function() {
     countdown--;
+
+    if(countdown == 0){
+      countdown = 10;
+    }
+
     client.emit('timer', { countdown: countdown });
   }, 60000);
 });

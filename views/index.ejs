@@ -55,9 +55,8 @@
 
 <script>
   $(function() {
-
     setInterval(function() {
       socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
-    }, 10 * 60 * 60);
+    }, 600000);
   });
 </script>
