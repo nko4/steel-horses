@@ -117,10 +117,11 @@ io.sockets.on('connection', function(client){
           var notificationsSent = 0;
           for(var i=0; i<potentials.length; i++) {
             var suggestion = potentials[i];
-            console.log(suggestion);
+            console.log(potentials.length);
             var socket = findSocketForUserId(suggestion.traderId);
             if(socket) {
               var suggestedSticker = album.findStickerByNumber(suggestion.suggestedSticker);
+              console.log("EMITTTTTTTTT");
               socket.emit("TradeRequest", {requesterId: userId, offerId: offerId, offeredSticker: offeredSticker,  suggestedSticker: suggestedSticker })
               notificationsSent++;
             }

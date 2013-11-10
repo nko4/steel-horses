@@ -161,7 +161,7 @@
 
     socket.on("TradeRequest", function (data) {
       var selfId = "<%= user._id %>";
-      var notification = $("#notifications ul li.skeleton").clone();
+      var notification = $("#notifications ul li.skeleton").first().clone();
       notification.find(".trade-what-number").text(data.suggestedSticker.number);
       notification.find(".trade-what-image").attr('src', data.suggestedSticker.image);
       notification.find(".trade-what-image").attr('width', '100px');
