@@ -109,8 +109,6 @@ io.sockets.on('connection', function(client){
         if(user && user.gluedStickers.indexOf(data.stickerNumber) == -1) {
           var socket = findSocketForUserId(user._id);
 
-          console.log(user._id);
-          console.log(data.userId);
           if(socket && data.userId != user._id) {
             socket.emit("tryTradeSticker")
           }
