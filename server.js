@@ -101,11 +101,12 @@ io.sockets.on('connection', function(client){
     sendSticker(data.userId);
   });
 
-  var countdown = 600;
+  var countdown = 10;
+
   setInterval(function() {
     countdown--;
     client.emit('timer', { countdown: countdown });
-  }, 1000);
+  }, 60000);
 });
 
 function sendSticker(userId) {
