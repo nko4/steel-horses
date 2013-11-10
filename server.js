@@ -78,6 +78,12 @@ io.sockets.on('connection', function(client){
     console.log("Sending a new sticker");
     sendSticker(data.userId);
   });
+
+  var countdown = 600;
+  setInterval(function() {
+    countdown--;
+    client.emit('timer', { countdown: countdown });
+  }, 1000);
 });
 
 function sendSticker(userId) {
