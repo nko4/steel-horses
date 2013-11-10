@@ -107,22 +107,18 @@ io.sockets.on('connection', function(client){
     var usersToTrade = [];
 
     for(var i=0; i< users.length; i++) {
-      var userToTrade = users[i];
-
-      User.findOne({username: userToTrade.username}, function(error, user) {
-        if(user && user.gluedStickers.indexOf(data.stickerNumber) == -1) {
-          usersToTrade.push(user);
-        }
-      });
+      usersToTrade.push(users[i].username);
     }
 
-//client.broadcast.emit('tryTradeSticker', data.userId, usersToTrade, data.stickerNumber);
+    User.find().where("username").in(usersToTrade).exec(function (error, users) {
+      client.broadcast.emit('tryTradeSticker', data.userId, users, data.stickerNumber);
+    });
   });
 
   client.on('startTrade', function (data) {
     var stickerNumber = data.stickerNumber;
     var userId = data.userId;
-    User.where({gluedStickers: {'$ne': stickerNumber}}).exec(function(err, traders) { 
+    User.where({gluedStickers: {'$ne': stickerNumber}}).exec(function(err, traders) {
       var offerId = Math.floor(Math.random()*100001);
       var offeredSticker = album.findStickerByNumber(stickerNumber);
       User.findOne({_id: userId}, function (err, user) {
@@ -140,10 +136,10 @@ io.sockets.on('connection', function(client){
               socket.emit("TradeRequest", {requesterId: userId, offerId: offerId, offeredSticker: offeredSticker,  suggestedSticker: suggestedSticker })
               notificationsSent++;
             }
-          } 
+          }
           if(notificationsSent == 0){ client.emit("NoTraderWasFound", stickerNumber) }
         }else{
-          client.emit("NoTraderWasFound", stickerNumber) 
+          client.emit("NoTraderWasFound", stickerNumber)
         }
       });
     });
@@ -169,7 +165,7 @@ io.sockets.on('connection', function(client){
       }
       client.broadcast.emit("DismissOffer", data.offerId);
     }else{
-      client.emit("TradeExpired", data.yStickerNumber) 
+      client.emit("TradeExpired", data.yStickerNumber)
     }
   });
 
