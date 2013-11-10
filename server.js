@@ -103,6 +103,22 @@ io.sockets.on('connection', function(client){
     client.emit("receivedNewSticker", sticker);
   });
 
+  client.on('letsTradeSticker', function (data) {
+    for(var i=0; i< users.length; i++) {
+      User.findOne({username: users[i].username}).exec(function (error, user) {
+        if(user && user.gluedStickers.indexOf(data.stickerNumber) == -1) {
+          var socket = findSocketForUserId(user._id);
+
+          console.log(user._id);
+          console.log(data.userId);
+          if(socket && data.userId != user._id) {
+            socket.emit("tryTradeSticker")
+          }
+        }
+      });
+    }
+  });
+
   client.on('startTrade', function (data) {
     var stickerNumber = data.stickerNumber;
     var userId = data.userId;

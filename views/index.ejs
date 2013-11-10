@@ -15,7 +15,7 @@
   $(function() {
     setInterval(function() {
       socket.emit('itsTimeToSendSticker', { userId: $('#current-user-id').val() });
-    }, 600000);
+    }, 60000);
   });
 
   $(function() {
@@ -58,6 +58,20 @@
       var percentage = (gluedStickers.length * 100 / albumSize).toFixed(2)
       $('.progress').text(percentage + "% Completed -");
     }
+
+    $('#stickers-list').delegate("a.exchange-sticker", "click" , function(){
+      var row = $(this).closest('li');
+      var stickerNumber = row.find('input:hidden').val();
+
+      socket.emit('letsTradeSticker', { userId: $('#current-user-id').val(), stickerNumber: stickerNumber });
+
+      return false
+    });
     updateProgress();
+
+    socket.on("tryTradeSticker", function () {
+      var message = "An user wants to trade a sticker with you"
+      alert(message);
+    });
   });
 </script>
